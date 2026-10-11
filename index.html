@@ -1,0 +1,632 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111111">
+<meta name="description" content="GENWIRE — News for the next generation. India, world, politics, technology, sports and culture.">
+<title>GENWIRE — News for the Next Generation</title>
+
+<style>
+:root {
+  --red: #e53935;
+  --black: #111111;
+  --paper: #f6f4ef;
+  --white: #ffffff;
+  --muted: #77736e;
+  --line: #e4e0d8;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--paper);
+  color: var(--black);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+}
+a { color: inherit; text-decoration: none; }
+button, input { font: inherit; }
+button { cursor: pointer; }
+.container { width: min(1180px, 92%); margin: auto; }
+
+.topbar {
+  background: var(--black);
+  color: white;
+  padding: 9px 0;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.topbar .container {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+header {
+  background: rgba(246,244,239,.96);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  backdrop-filter: blur(14px);
+}
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 22px;
+  padding: 17px 0;
+}
+.logo {
+  font-size: 36px;
+  font-weight: 1000;
+  letter-spacing: -2px;
+  line-height: 1;
+}
+.logo span { color: var(--red); }
+.tagline {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 6px;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+nav { display: flex; gap: 18px; }
+nav a {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+nav a:hover { color: var(--red); }
+
+.search {
+  display: flex;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  overflow: hidden;
+}
+.search input {
+  border: 0;
+  outline: none;
+  width: 125px;
+  padding: 10px 12px;
+  font-size: 12px;
+  background: transparent;
+}
+.search button {
+  border: 0;
+  background: var(--red);
+  color: white;
+  padding: 0 14px;
+}
+
+.breaking {
+  background: var(--red);
+  color: white;
+  padding: 11px 0;
+  font-size: 12px;
+  font-weight: 700;
+}
+.breaking .container {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+.breaking-label {
+  background: white;
+  color: var(--red);
+  padding: 4px 8px;
+  font-size: 10px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+main { padding: 28px 0 60px; }
+.kicker {
+  color: var(--red);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.4fr .8fr;
+  gap: 22px;
+}
+.hero {
+  position: relative;
+  min-height: 420px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: #171717;
+  color: white;
+}
+.hero > img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  inset: 0;
+  opacity: .55;
+  transition: transform .5s;
+}
+.hero:hover > img { transform: scale(1.035); }
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 20% 0 0;
+  background: linear-gradient(transparent, rgba(0,0,0,.96));
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 28px;
+}
+.hero h1 {
+  font-size: clamp(34px, 4.5vw, 58px);
+  letter-spacing: -2px;
+  line-height: .98;
+  margin: 13px 0;
+  font-weight: 950;
+}
+.hero h1 span { color: #ff5550; }
+.hero p {
+  color: #e9e9e9;
+  max-width: 600px;
+  font-size: 14px;
+  margin-bottom: 17px;
+}
+.meta {
+  font-size: 10px;
+  color: #d3d3d3;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.primary-btn {
+  display: inline-block;
+  margin-top: 17px;
+  background: var(--red);
+  color: white;
+  padding: 11px 16px;
+  border: 0;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .6px;
+}
+.primary-btn:hover { background: #bd211e; }
+
+.side-list { display: grid; gap: 13px; }
+.side-item {
+  background: white;
+  border: 1px solid var(--line);
+  padding: 11px;
+  display: grid;
+  grid-template-columns: 105px 1fr;
+  gap: 13px;
+  min-height: 125px;
+}
+.side-item img {
+  width: 100%;
+  height: 100%;
+  min-height: 100px;
+  object-fit: cover;
+}
+.side-item h3 {
+  font-size: 16px;
+  line-height: 1.15;
+  margin: 7px 0;
+}
+.side-item p { font-size: 11px; color: var(--muted); }
+.category {
+  color: var(--red);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+.section-heading {
+  margin: 37px 0 18px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid var(--black);
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 12px;
+}
+.section-heading h2 {
+  font-size: 27px;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+.section-heading span {
+  color: var(--red);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.news-card {
+  background: white;
+  border: 1px solid var(--line);
+  overflow: hidden;
+  transition: transform .2s, box-shadow .2s;
+}
+.news-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px #00000012;
+}
+.news-card img {
+  display: block;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background: #ddd;
+}
+.card-content { padding: 17px; }
+.card-content h3 {
+  font-size: 21px;
+  line-height: 1.15;
+  margin: 9px 0;
+  letter-spacing: -.5px;
+}
+.card-content p {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+.text-btn {
+  border: 0;
+  border-bottom: 2px solid var(--red);
+  background: none;
+  padding-bottom: 4px;
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.full-article {
+  display: none;
+  margin-top: 25px;
+  background: white;
+  border: 1px solid var(--line);
+  padding: clamp(20px, 4vw, 42px);
+}
+.full-article.visible { display: block; }
+.full-article h2 {
+  font-size: clamp(30px, 5vw, 48px);
+  line-height: 1.02;
+  letter-spacing: -1.5px;
+  margin: 12px 0;
+}
+.article-subtitle {
+  font-size: 17px;
+  color: #55514b;
+  margin-bottom: 15px;
+}
+.article-photos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 22px 0;
+}
+.article-photos img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  background: #ddd;
+}
+.article-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+.article-columns h3 {
+  font-size: 16px;
+  border-left: 4px solid var(--red);
+  padding-left: 10px;
+  margin: 22px 0 8px;
+  text-transform: uppercase;
+}
+.article-columns p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #333;
+}
+.editor-note {
+  background: #f0ece5;
+  border-left: 4px solid var(--red);
+  padding: 15px;
+  font-size: 12px;
+  line-height: 1.6;
+  margin-top: 25px;
+}
+.no-results {
+  display: none;
+  background: white;
+  padding: 25px;
+  margin-top: 15px;
+}
+footer {
+  background: var(--black);
+  color: white;
+  padding: 30px 0;
+}
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+}
+footer p {
+  color: #aaa;
+  font-size: 11px;
+  line-height: 1.7;
+}
+footer .logo { font-size: 29px; }
+
+@media(max-width:900px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero { min-height: 410px; }
+  .side-list { grid-template-columns: 1fr 1fr; }
+  .header-inner { flex-wrap: wrap; }
+  .header-right { width: 100%; justify-content: space-between; }
+}
+@media(max-width:600px) {
+  .topbar .container span:last-child { display: none; }
+  .header-right { flex-wrap: wrap; gap: 12px; }
+  nav { width: 100%; justify-content: space-between; gap: 7px; }
+  nav a { font-size: 10px; }
+  .search { margin-left: auto; }
+  .search input { width: 150px; }
+  .hero { min-height: 420px; }
+  .hero-content { padding: 20px; }
+  .hero h1 { font-size: 38px; }
+  .side-list { grid-template-columns: 1fr; }
+  .news-grid { grid-template-columns: 1fr; }
+  .news-card img { height: 230px; }
+  .article-columns { grid-template-columns: 1fr; gap: 0; }
+  .article-photos img { height: 100px; }
+  .section-heading h2 { font-size: 22px; }
+  .section-heading span { font-size: 8px; }
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+
+<body>
+<div class="topbar">
+  <div class="container">
+    <span>Independent-minded. Fact-focused.</span>
+    <span>Digital edition · Stories that matter</span>
+  </div>
+</div>
+
+<header>
+  <div class="container header-inner">
+    <a href="#" aria-label="GENWIRE home">
+      <div class="logo">GEN<span>WIRE</span></div>
+      <div class="tagline">News for the next generation</div>
+    </a>
+
+    <div class="header-right">
+      <nav aria-label="Main navigation">
+        <a href="#latest">Latest</a>
+        <a href="#india">India</a>
+        <a href="#world">World</a>
+        <a href="#tech">Tech</a>
+        <a href="#sports">Sports</a>
+      </nav>
+      <form class="search" id="searchForm">
+        <input id="searchInput" type="search" placeholder="Search news..." aria-label="Search news">
+        <button type="submit" aria-label="Search">⌕</button>
+      </form>
+    </div>
+  </div>
+</header>
+
+<div class="breaking">
+  <div class="container">
+    <span class="breaking-label">TOP STORY</span>
+    <span>Delhi protest report: claims of mass detentions require verification.</span>
+  </div>
+</div>
+
+<main class="container" id="latest">
+
+  <section class="hero-grid">
+    <a href="#article" class="hero" id="heroLink">
+      <img src="image.png" alt="Protesters near a police bus; event context needs verification">
+      <div class="hero-content">
+        <div class="kicker">India / Public Affairs</div>
+        <h1>DELHI PROTESTS<br><span>2,500+ DETAINED</span></h1>
+        <p>A supplied report describes mass detentions amid demonstrations over alleged electoral irregularities.</p>
+        <div class="meta">October 11, 2026 · Read the report</div>
+        <span class="primary-btn">Read Full Story ↗</span>
+      </div>
+    </a>
+
+    <div class="side-list">
+      <article class="side-item" id="india">
+        <img src="image(1).png" alt="Police personnel near crowd-control barricades">
+        <div>
+          <div class="category">India</div>
+          <h3>Supreme Court hearing scheduled</h3>
+          <p>Petitions reportedly challenge detentions and transport restrictions.</p>
+        </div>
+      </article>
+
+      <article class="side-item" id="world">
+        <img src="image(2).png" alt="Crowd near a bus; source and date need checking">
+        <div>
+          <div class="category">Rights & Society</div>
+          <h3>Questions over peaceful assembly</h3>
+          <p>The report raises issues around detention and democratic rights.</p>
+        </div>
+      </article>
+
+      <article class="side-item" id="tech">
+        <div style="background:#111;color:#fff;display:grid;place-items:center;font-weight:900;font-size:18px;min-height:100px">
+          GEN<span style="color:#e53935">WIRE</span>
+        </div>
+        <div>
+          <div class="category">Our approach</div>
+          <h3>Context over noise</h3>
+          <p>We aim to separate reported claims from verified facts.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-heading">
+      <h2>THE LATEST</h2>
+      <span>READ. QUESTION. UNDERSTAND.</span>
+    </div>
+
+    <div class="news-grid" id="newsGrid">
+      <article class="news-card searchable" data-tags="india delhi protests detentions politics">
+        <img src="image.png" alt="People at a bus during a reported protest">
+        <div class="card-content">
+          <div class="category">India · Public Affairs</div>
+          <h3>Delhi protests: what the report says</h3>
+          <p>The supplied text claims more than 2,500 detentions. The figure has not been independently verified here.</p>
+          <button class="text-btn" onclick="showArticle()">Read full article ↗</button>
+        </div>
+      </article>
+
+      <article class="news-card searchable" data-tags="rights society united nations government">
+        <img src="image(1).png" alt="Police near barricades at night">
+        <div class="card-content">
+          <div class="category">Rights & Society</div>
+          <h3>UN office reportedly expresses concern</h3>
+          <p>The supplied report says the UN human rights office raised concerns and the government rejected its criticism.</p>
+          <button class="text-btn" onclick="showArticle()">Read context ↗</button>
+        </div>
+      </article>
+
+      <article class="news-card searchable" data-tags="court supreme court law">
+        <img src="image(2).png" alt="Crowd near a bus">
+        <div class="card-content">
+          <div class="category">Law & Courts</div>
+          <h3>What to know about the court hearing</h3>
+          <p>The supplied text says a special hearing was scheduled but does not provide the final outcome.</p>
+          <button class="text-btn" onclick="showArticle()">Read context ↗</button>
+        </div>
+      </article>
+    </div>
+
+    <div class="no-results" id="noResults">No stories matched your search. Try another keyword.</div>
+  </section>
+
+  <article class="full-article" id="article">
+    <div class="kicker">GENWIRE · India / Public Affairs</div>
+    <h2>DELHI PROTESTS: 2,500+ DETAINED</h2>
+    <p class="article-subtitle">
+      A supplied report says more than 2,500 protesters were detained during demonstrations demanding the resignation of Chief Election Commissioner Gyanesh Kumar over alleged electoral irregularities.
+    </p>
+    <div class="meta" style="color:#777">October 11, 2026 · Claims attributed to supplied report</div>
+
+    <div class="article-photos">
+      <img src="image.png" alt="Protest scene; original source and date to be verified">
+      <img src="image(1).png" alt="Police near barricades; original source and date to be verified">
+      <img src="image(2).png" alt="Crowd near a bus; original source and date to be verified">
+    </div>
+
+    <div class="article-columns">
+      <div>
+        <h3>Supreme Court hearing</h3>
+        <p>
+          The supplied report says the Supreme Court scheduled a special hearing on petitions challenging the detentions and reported restrictions on public transport. The supplied text does not include the final outcome of that hearing.
+        </p>
+
+        <h3>Key developments</h3>
+        <p>
+          According to the report, CJP leaders Abhijeet Dipke, Saurav Das and Ashutosh Ranka were released on Sunday morning, as stated by the party’s legal head. The report also says Dhruv Rathee was released from detention in Gurugram.
+        </p>
+      </div>
+
+      <div>
+        <h3>UN and government response</h3>
+        <p>
+          The supplied report says the UN human rights office expressed concern over reports of mass detentions, while the Indian government rejected the body’s criticism.
+        </p>
+
+        <h3>Why it matters</h3>
+        <p>
+          The events raise questions about peaceful assembly, preventive detention and democratic rights. Readers should distinguish allegations, attributed statements and independently verified findings.
+        </p>
+      </div>
+    </div>
+
+    <div class="editor-note">
+      <strong>EDITORIAL NOTE:</strong> This article is based on supplied text and has not been independently verified. Before publication, verify the original source, detention figures, names, photo captions and latest court status. Do not imply these images depict this specific event unless their provenance is confirmed.
+    </div>
+  </article>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div>
+      <div class="logo">GEN<span>WIRE</span></div>
+      <p>News for the next generation.<br>The latest. The facts. The full story.</p>
+    </div>
+    <p>© 2026 GENWIRE · Independent digital news concept<br>Replace sample content with verified reporting.</p>
+  </div>
+</footer>
+
+<script>
+function showArticle() {
+  const article = document.getElementById("article");
+  article.classList.add("visible");
+  article.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+document.getElementById("heroLink").addEventListener("click", function(event) {
+  event.preventDefault();
+  showArticle();
+});
+
+document.getElementById("searchForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const query = document.getElementById("searchInput").value.trim().toLowerCase();
+  const cards = document.querySelectorAll(".searchable");
+  let visibleCount = 0;
+
+  cards.forEach(function(card) {
+    const text = (card.innerText + " " + card.dataset.tags).toLowerCase();
+    const matches = !query || text.includes(query);
+    card.style.display = matches ? "" : "none";
+    if (matches) visibleCount++;
+  });
+
+  document.getElementById("noResults").style.display =
+    visibleCount === 0 ? "block" : "none";
+
+  if (query) {
+    document.getElementById("newsGrid").scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  }
+});
+</script>
+</body>
+</html>
